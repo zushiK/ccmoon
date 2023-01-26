@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css";
 import { useQuery } from "react-query";
 import { HelloDataType } from "../api/hello";
 
-export default () => {
+export default function Index() {
   const { isLoading, error, data } = useQuery<HelloDataType>(
     "posts",
     async () => fetch("/api/hello").then((res) => res.json())
@@ -27,12 +27,12 @@ export default () => {
           <h1>犬の画像</h1>
         </main>
         <div style={{ position: "relative", width: 400, height: 400 }}>
-          {data.data.map((item) => (
-            <div>{item.name}</div>
+          {data.data.map((item, key) => (
+            <div key={key}>{item.name}</div>
           ))}
         </div>
         {/* <button onClick={handleClick}>画像を検索</button> */}
       </main>
     </>
   );
-};
+}
